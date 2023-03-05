@@ -1,4 +1,4 @@
-package ch.selimovic.scrumpro
+package ch.selimovic.scrumpro.data
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
