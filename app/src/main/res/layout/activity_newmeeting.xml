@@ -38,7 +38,7 @@
             android:spinnerMode="dropdown"/>
 
         <Button
-            android:id="@+id/btnCreate"
+            android:id="@+id/btnApprove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -46,5 +46,6 @@
             android:text="yes"
             android:textColor="#FFFFFF"
             android:backgroundTint="#6BA0D7"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

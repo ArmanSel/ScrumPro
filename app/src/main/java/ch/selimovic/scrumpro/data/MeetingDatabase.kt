@@ -5,14 +5,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class MeetingDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
     companion object {
-        private const val DATABASE_VERSION = 1
-        private const val DATABASE_NAME = "MeetingDatabase"
-        private const val TABLE_NAME = "meetings"
-        private const val COLUMN_ID = "_id"
-        private const val COLUMN_TYPE = "type"
-        private const val COLUMN_DATE = "date"
+        const val DATABASE_VERSION = 1
+        const val DATABASE_NAME = "MeetingDatabase"
+        const val TABLE_NAME = "meetings"
+        const val COLUMN_ID = "_id"
+        const val COLUMN_TYPE = "type"
+        const val COLUMN_DATE = "date"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -23,5 +22,9 @@ class MeetingDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
+    }
+
+    fun getColumnType(): String {
+        return COLUMN_TYPE
     }
 }
