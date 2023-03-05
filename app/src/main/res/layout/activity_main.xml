@@ -11,7 +11,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtGroupName"
@@ -39,8 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
+            android:backgroundTint="#6BA0D7"
             android:text="+ Add Meeting"
-            android:textAlignment="center"
-            android:backgroundTint="#6BA0D7"/>
+            android:textAlignment="center" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
