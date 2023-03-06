@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import ch.selimovic.scrumpro.R
 import ch.selimovic.scrumpro.data.MeetingDatabase
+import ch.selimovic.scrumpro.domain.NewMeetingPresenter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -31,35 +32,21 @@ class NewMeetingActivity : Activity() {
         val dbHelper = MeetingDatabase(this)
         val db = dbHelper.writableDatabase
 
+        val presenter = NewMeetingPresenter(this, dbHelper)
+
         // Get the CalendarView object and set a OnDateChangeListener
         val calendarAddView = findViewById<CalendarView>(R.id.calendarAddView)
         calendarAddView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Get the selected date as a Date object
-            val selectedDate = Calendar.getInstance()
-            selectedDate.set(year, month, dayOfMonth)
-            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = dateFormatter.format(selectedDate.time)
+            // Get the selected date as a LocalDate object
+            val selectedDate = LocalDate.of(year, month + 1, dayOfMonth)
 
             // Get the selected meeting type from the spinner
             val spMeetingType = findViewById<Spinner>(R.id.spMeetingType)
             val selectedMeetingType = spMeetingType.selectedItem.toString()
 
-            // Insert a new row into the meetings table
-            val values = ContentValues().apply {
-                put(MeetingDatabase.COLUMN_TYPE, selectedMeetingType)
-                put(MeetingDatabase.COLUMN_DATE, formattedDate)
-            }
-            val newRowId = db.insert(MeetingDatabase.TABLE_NAME, null, values)
+            // Create the new meeting
+            presenter.createNewMeeting(selectedMeetingType, selectedDate)
 
-            // Show a toast message to indicate success
-            Toast.makeText(this, "Meeting created", Toast.LENGTH_SHORT).show()
-            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
-            } else {
-                vibrator.vibrate(1000)
-            }
-            Log.d("Vibrator", "Vibration started")
             // Finish the activity to return to the previous screen
             finish()
         }
