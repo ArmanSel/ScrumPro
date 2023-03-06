@@ -98,6 +98,29 @@ class EditMeetingActivity : AppCompatActivity() {
             finish()
         }
 
+        val btnDelete = findViewById<Button>(R.id.btnDelete)
+
+        btnDelete.setOnClickListener {
+            // Get the selected meeting date
+            val selectedDate = spinner.selectedItem.toString()
+
+            // Delete the meeting from the database
+            val db = MeetingDatabase(this).writableDatabase
+            db.delete(
+                MeetingDatabase.TABLE_NAME,
+                "${MeetingDatabase.COLUMN_DATE} = ?",
+                arrayOf(selectedDate)
+            )
+
+            // Close the database
+            db.close()
+
+            // Show a toast to indicate that the meeting was successfully deleted
+            Toast.makeText(this, "Meeting successfully deleted!", Toast.LENGTH_SHORT).show()
+
+            // Finish the activity
+            finish()
+        }
     }
     private fun getIndex(spinner: Spinner, myString: String): Int {
         for (i in 0 until spinner.count) {
