@@ -39,5 +39,15 @@
             android:backgroundTint="#6BA0D7"
             android:text="+ Add Meeting"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="#6BA0D7"
+            android:text="- Edit Meeting"
+            android:textAlignment="center" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
