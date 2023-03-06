@@ -21,6 +21,9 @@
             android:id="@+id/calendarView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusedMonthDateColor="@color/black"
+            android:weekDayTextAppearance="@style/WeekDayTextAppearance"
+            android:dateTextAppearance="@style/DateTextAppearance"
             android:background="#FFFFFF" />
 
         <TextView
@@ -28,26 +31,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
             android:text="Calendar Details"
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/btnEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:backgroundTint="#6BA0D7"
-            android:text="- Edit Meeting"
             android:textAlignment="center" />
 
         <Button
             android:id="@+id/btnCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:backgroundTint="#6BA0D7"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/button_background"
             android:text="+ Add Meeting"
+            android:textColor="@color/text_color"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/txtCalendarDetails" />
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/button_background"
+            android:text="- Edit Meeting"
+            android:textColor="@color/text_color"
             android:textAlignment="center" />
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

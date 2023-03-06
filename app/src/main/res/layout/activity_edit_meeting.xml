@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/spMeeting"
+        android:theme="@style/MySpinnerStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spMeetingType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:entries="@array/meeting_types" />
 
-        <Spinner
-            android:id="@+id/spMeeting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
 
-        <Spinner
-            android:id="@+id/spMeetingType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/meeting_types" />
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6BA0D7"
+        android:text="Save Changes" />
 
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner" />
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:backgroundTint="#6BA0D7"
+        android:text="Delete Meeting" />
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#6BA0D7"
-            android:text="Save Changes" />
-
-        <Button
-            android:id="@+id/btnDelete"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:backgroundTint="#6BA0D7"
-            android:text="Delete Meeting" />
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
