@@ -9,7 +9,6 @@
 
     <Spinner
         android:id="@+id/spMeeting"
-        android:theme="@style/MySpinnerStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
