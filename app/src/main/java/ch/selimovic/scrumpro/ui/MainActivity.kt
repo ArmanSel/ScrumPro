@@ -7,44 +7,38 @@ import android.widget.Button
 import android.widget.TextView
 import ch.selimovic.scrumpro.R
 import ch.selimovic.scrumpro.data.MeetingDatabase
+import ch.selimovic.scrumpro.domain.MeetingPresenter
+import ch.selimovic.scrumpro.domain.MeetingRepository
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var meetingDatabase: MeetingDatabase
+    private lateinit var meetingPresenter: MeetingPresenter
     private lateinit var txtCalendarDetails: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        meetingDatabase = MeetingDatabase(this)
+        val meetingDatabase = MeetingDatabase(this)
+        val meetingRepository = MeetingRepository(meetingDatabase)
+        meetingPresenter = MeetingPresenter(meetingRepository)
+
         txtCalendarDetails = findViewById(R.id.txtCalendarDetails)
 
-        // Retrieve all meetings from the database
-        val meetings = meetingDatabase.getAllMeetings()
+        // Get the formatted meeting list from the presenter and display it in the TextView
+        txtCalendarDetails.text = meetingPresenter.getFormattedMeetingList()
 
-        // Format the meetings as a string and display them in the TextView
-        val meetingsString = meetings.joinToString(separator = "\n") { meeting ->
-            "${meeting.type} - ${meeting.dateFormatted}"
-        }
-        txtCalendarDetails.text = meetingsString
-
+        // Set up button click listeners
         val btnCreate = findViewById<Button>(R.id.btnCreate)
-
         btnCreate.setOnClickListener {
             val intent = Intent(this, NewMeetingActivity::class.java)
             startActivity(intent)
-
         }
 
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         btnEdit.setOnClickListener {
-            // Create an Intent to switch to the EditMeetingActivity
             val intent = Intent(this, EditMeetingActivity::class.java)
-
-            // Start the EditMeetingActivity
             startActivity(intent)
         }
     }
-
 }
