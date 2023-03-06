@@ -37,6 +37,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        val btnEdit = findViewById<Button>(R.id.btnEdit)
+        btnEdit.setOnClickListener {
+            // Create an Intent to switch to the EditMeetingActivity
+            val intent = Intent(this, EditMeetingActivity::class.java)
+
+            // Start the EditMeetingActivity
+            startActivity(intent)
+        }
     }
 
 }
