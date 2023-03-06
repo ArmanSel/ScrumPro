@@ -3,9 +3,13 @@ package ch.selimovic.scrumpro.ui
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Spinner
@@ -49,7 +53,13 @@ class NewMeetingActivity : Activity() {
 
             // Show a toast message to indicate success
             Toast.makeText(this, "Meeting created", Toast.LENGTH_SHORT).show()
-
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(1000)
+            }
+            Log.d("Vibrator", "Vibration started")
             // Finish the activity to return to the previous screen
             finish()
         }

@@ -2,10 +2,15 @@ package ch.selimovic.scrumpro.ui
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Context
+import android.os.Build
 import android.view.View
 import java.util.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.util.Log
 import android.widget.*
 import ch.selimovic.scrumpro.R
 import ch.selimovic.scrumpro.data.MeetingDatabase
@@ -93,6 +98,14 @@ class EditMeetingActivity : AppCompatActivity() {
 
             // Show a toast to indicate that the meeting was successfully edited
             Toast.makeText(this, "Meeting successfully edited!", Toast.LENGTH_SHORT).show()
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(1000)
+            }
+            Log.d("Vibrator", "Vibration started")
+
 
             // Finish the activity
             finish()
@@ -117,6 +130,14 @@ class EditMeetingActivity : AppCompatActivity() {
 
             // Show a toast to indicate that the meeting was successfully deleted
             Toast.makeText(this, "Meeting successfully deleted!", Toast.LENGTH_SHORT).show()
+            val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(1000)
+            }
+            Log.d("Vibrator", "Vibration started")
+
 
             // Finish the activity
             finish()
