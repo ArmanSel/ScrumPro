@@ -16,13 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtGroupName2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAlignment="center" />
-
         <CalendarView
             android:id="@+id/calendarAddView"
             android:layout_width="wrap_content"
@@ -31,13 +24,15 @@
 
         <Spinner
             android:id="@+id/spMeetingType"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:background="#FFFFFF"
-            android:spinnerMode="dropdown"
             android:entries="@array/meeting_types"
-            android:prompt="@string/meeting_type_prompt" />
+            android:fadingEdge="horizontal|vertical"
+            android:minHeight="48dp"
+            android:prompt="@string/meeting_type_prompt"
+            android:spinnerMode="dropdown" />
 
         <Button
             android:id="@+id/btnApprove"
