@@ -53,4 +53,23 @@ class MeetingDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
         return meetings
     }
+    @SuppressLint("Range")
+    fun getAllMeetingDates(): List<String> {
+        val meetingDates = mutableListOf<String>()
+        val selectQuery = "SELECT $COLUMN_DATE FROM $TABLE_NAME"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val dateString = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+                meetingDates.add(dateString)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+
+        return meetingDates
+    }
+
 }
