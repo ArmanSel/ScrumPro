@@ -35,7 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="#FFFFFF"
-            android:spinnerMode="dropdown"/>
+            android:spinnerMode="dropdown"
+            android:entries="@array/meeting_types"
+            android:prompt="@string/meeting_type_prompt" />
 
         <Button
             android:id="@+id/btnApprove"

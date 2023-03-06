@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import ch.selimovic.scrumpro.R
@@ -35,9 +36,13 @@ class NewMeetingActivity : Activity() {
             val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val formattedDate = dateFormatter.format(selectedDate.time)
 
+            // Get the selected meeting type from the spinner
+            val spMeetingType = findViewById<Spinner>(R.id.spMeetingType)
+            val selectedMeetingType = spMeetingType.selectedItem.toString()
+
             // Insert a new row into the meetings table
             val values = ContentValues().apply {
-                put(MeetingDatabase.COLUMN_TYPE, "Daily Standup")
+                put(MeetingDatabase.COLUMN_TYPE, selectedMeetingType)
                 put(MeetingDatabase.COLUMN_DATE, formattedDate)
             }
             val newRowId = db.insert(MeetingDatabase.TABLE_NAME, null, values)
