@@ -1,7 +1,9 @@
 package ch.selimovic.scrumpro.ui
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
+import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -15,7 +17,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class NewMeetingActivity : Activity() {
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newmeeting)
@@ -24,16 +26,19 @@ class NewMeetingActivity : Activity() {
         val dbHelper = MeetingDatabase(this)
         val db = dbHelper.writableDatabase
 
-        val btnApprove = findViewById<Button>(R.id.btnApprove)
-        btnApprove.setOnClickListener {
+        // Get the CalendarView object and set a OnDateChangeListener
+        val calendarAddView = findViewById<CalendarView>(R.id.calendarAddView)
+        calendarAddView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // Get the selected date as a Date object
-            val calendarAddView = findViewById<CalendarView>(R.id.calendarAddView)
-            val selectedDate = Date(calendarAddView.date)
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, month, dayOfMonth)
+            val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = dateFormatter.format(selectedDate.time)
 
             // Insert a new row into the meetings table
             val values = ContentValues().apply {
                 put(MeetingDatabase.COLUMN_TYPE, "Daily Standup")
-                put(MeetingDatabase.COLUMN_DATE, selectedDate.time)
+                put(MeetingDatabase.COLUMN_DATE, formattedDate)
             }
             val newRowId = db.insert(MeetingDatabase.TABLE_NAME, null, values)
 
@@ -42,6 +47,12 @@ class NewMeetingActivity : Activity() {
 
             // Finish the activity to return to the previous screen
             finish()
+        }
+
+        val btnApprove = findViewById<Button>(R.id.btnApprove)
+        btnApprove.setOnClickListener {
+            // Show a toast message to inform the user to select a date first
+            Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show()
         }
     }
 }
