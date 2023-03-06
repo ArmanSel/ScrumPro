@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         // Format the meetings as a string and display them in the TextView
         val meetingsString = meetings.joinToString(separator = "\n") { meeting ->
-            meeting.dateFormatted
+            "${meeting.type} - ${meeting.dateFormatted}"
         }
         txtCalendarDetails.text = meetingsString
 
