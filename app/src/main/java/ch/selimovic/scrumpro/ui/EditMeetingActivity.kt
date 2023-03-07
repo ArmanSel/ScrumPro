@@ -15,8 +15,6 @@ import android.widget.*
 import ch.selimovic.scrumpro.R
 import ch.selimovic.scrumpro.data.MeetingDatabase
 import java.text.SimpleDateFormat
-import java.util.*
-
 class EditMeetingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

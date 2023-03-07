@@ -2,24 +2,15 @@ package ch.selimovic.scrumpro.ui
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues
-import android.content.Context
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.util.Log
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import ch.selimovic.scrumpro.R
 import ch.selimovic.scrumpro.data.MeetingDatabase
 import ch.selimovic.scrumpro.domain.NewMeetingPresenter
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class NewMeetingActivity : Activity() {
