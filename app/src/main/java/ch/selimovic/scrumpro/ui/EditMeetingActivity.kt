@@ -51,7 +51,7 @@ class EditMeetingActivity : AppCompatActivity() {
                     val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateString)
 
                     spMeetingType.setSelection(getIndex(spMeetingType, type))
-                    datePicker.updateDate(date.year + 1900, date.month, date.date)
+                    datePicker.updateDate(Calendar.YEAR + 1900, Calendar.MONTH, Calendar.DAY_OF_MONTH)
                 }
 
                 cursor.close()
