@@ -15,7 +15,17 @@ class MeetingDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         const val COLUMN_ID = "_id"
         const val COLUMN_TYPE = "type"
         const val COLUMN_DATE = "date"
+
+        @Volatile
+        private var instance: MeetingDatabase? = null
+
+        fun getInstance(context: Context): MeetingDatabase {
+            return instance ?: synchronized(this) {
+                instance ?: MeetingDatabase(context).also { instance = it }
+            }
+        }
     }
+
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_MEETING_TABLE =
@@ -27,6 +37,7 @@ class MeetingDatabase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
+
 
     @SuppressLint("Range")
     fun getAllMeetings(): List<Meeting> {
